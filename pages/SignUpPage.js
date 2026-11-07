@@ -1,8 +1,7 @@
-import { time } from "node:console";
-
-class SignUpPage {
+import { Base } from "./Base.js";
+class SignUpPage extends Base {
   constructor(page) {
-    this.page = page;
+    super(page);
     this.regesterLink = page.locator('a[href="/register"]');
     this.genderRadioButton = page.locator('input[id="gender-male"]');
     this.firstNameInput = page.locator('input[id="FirstName"]');
@@ -11,22 +10,15 @@ class SignUpPage {
     this.passwordInput = page.locator('input[id="Password"]');
     this.confirmPasswordInput = page.locator('input[id="ConfirmPassword"]');
     this.registerButton = page.locator('input[id="register-button"]');
+    this.verifyLogin = page.locator('a[href="/logout"]');
   }
-
-  async pageopen() {
-    await this.page.goto("https://demowebshop.tricentis.com/", {
-      waitUntil: "domcontentloaded",
-      timeout: 50000,
-    });
-  }
-
 
   async clickRegisterLink() {
-    await this.regesterLink.click();
+    await this.clickelement(this.regesterLink); // base class ar function
   }
 
   async selectGender() {
-    await this.genderRadioButton.check();
+    await this.clickelement(this.genderRadioButton); // base class ar function
   }
 
   async enterFirstName(firstName) {
@@ -50,7 +42,8 @@ class SignUpPage {
   }
 
   async clickRegisterButton() {
-    await this.registerButton.click();
+    await this.clickelement(this.registerButton); // base class ar function
+    // await this.registerButton.click();
   }
 
 
